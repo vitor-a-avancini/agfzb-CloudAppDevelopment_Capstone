@@ -10,16 +10,11 @@ from datetime import datetime
 import logging
 import json
 
-
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
 
-# Create your views here.
-
-
 # Create an `about` view to render a static about page
-# def about(request):
 def about(request):
     context = {}
     if request.method == "GET":
@@ -27,14 +22,12 @@ def about(request):
 
 
 # Create a `contact` view to return a static contact page
-#def contact(request):
 def contact(request):
     context = {}
     if request.method == "GET":
         return render(request, 'djangoapp/contact.html', context)
 
 # Create a `login_request` view to handle sign in request
-# def login_request(request):
 def login_request(request):
     context = {}
     url = "https://068e63c2.us-south.apigw.appdomain.cloud/api/dealership"
@@ -60,7 +53,6 @@ def login_request(request):
 
 
 # Create a `logout_request` view to handle sign out request
-# def logout_request(request):
 def logout_request(request):
     context = {}
     url = "https://068e63c2.us-south.apigw.appdomain.cloud/api/dealership"
@@ -74,8 +66,8 @@ def logout_request(request):
     # Redirect user back to course list view
     return render(request, 'djangoapp/index.html', context)
 
+
 # Create a `registration_request` view to handle sign up request
-# def registration_request(request):
 def registration_request(request):
     context = {}
     # If it is a GET request, just render the registration page
@@ -113,7 +105,6 @@ def get_dealerships(request):
     if request.method == "GET":
         context={}
         url = "https://068e63c2.us-south.apigw.appdomain.cloud/api/dealership"
-        apikey="VFMtjHWxR8GTyzumoZtAAGrq0GfuiqQHf50YSf5-aHnB"
         # Get dealers from the URL
         dealerships = get_dealers_from_cf(url)
         # Concat all dealer's short name
@@ -127,16 +118,13 @@ def get_dealerships(request):
 def get_dealer_details(request, dealer_id):
     context={}
     url = "https://068e63c2.us-south.apigw.appdomain.cloud/api/review"
-    apikey="VFMtjHWxR8GTyzumoZtAAGrq0GfuiqQHf50YSf5-aHnB"
     #print(dealer_id)
     # Get dealers from the URL
     dealer_details = get_dealer_reviews_from_cf(url,dealer_id)
     context["dealer_id"]=dealer_id
     context["reviews"]=dealer_details
     return render(request, 'djangoapp/dealer_details.html', context)
-
 # Create a `add_review` view to submit a review
-# def add_review(request, dealer_id):
 def add_review(request, dealer_id):
     context = {}
     # If it is a GET request, just render the add_review page
@@ -148,12 +136,11 @@ def add_review(request, dealer_id):
             "dealer_name": get_dealers_from_cf(url)[dealer_id-1].full_name,
             "cars": CarModel.objects.all()
         }
-        #print(context)
         return render(request, 'djangoapp/add_review.html', context)
     elif request.method == 'POST':
         if (request.user.is_authenticated):
             review = dict()
-            review["id"]=0#placeholder
+            review["id"]=0
             review["name"]=request.POST["name"]
             review["dealership"]=dealer_id
             review["review"]=request.POST["content"]

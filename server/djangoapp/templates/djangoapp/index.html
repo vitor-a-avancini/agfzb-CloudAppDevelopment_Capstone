@@ -39,33 +39,40 @@
 </header>
 
 
-<main role="main" class="container pt-3">
-    <table class="table" id="table" data-filter-control="true">
-        <thead>
-            <tr>
-                <th data-field="id">ID</th>
-                <th data-field="full_name">Dealership Name</th>
-                <th data-field="city">City</th>
-                <th data-field="address">Address</th>
-                <th data-field="zip">ZIP Code</th>
-                <th data-field="state" data-filter-control="select">State</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            {% for dealer in dealership_list %}
+    <body>
+    <!--Header and Navbar -->
+    
+    <!--Add a dealer table here -->
+    <main role="main" class="container pt-3">
+        <table class="table" id="table" data-filter-control="true">
+            <thead>
                 <tr>
-                    <td>{{dealer.id}}</td>
-                    <td><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}}</a></td>
-                    <td>{{dealer.city}}</td>
-                    <td>{{dealer.address}}</td>
-                    <td>{{dealer.zip}}</td>
-                    <td>{{dealer.st}}</td>
+                    <th data-field="id">ID</th>
+                    <th data-field="full_name">Dealership Name</th>
+                    <th data-field="city">City</th>
+                    <th data-field="address">Address</th>
+                    <th data-field="zip">ZIP Code</th>
+                    <th data-field="state" data-filter-control="select">State</th>
+                    
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</main>
+            </thead>
+            <tbody>
+                {% for dealer in dealership_list %}
+                    <tr>
+                        <td>{{dealer.id}}</td>
+                        <td><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}}</a></td>
+                        <td>{{dealer.city}}</td>
+                        <td>{{dealer.address}}</td>
+                        <td>{{dealer.zip}}</td>
+                        <td>{{dealer.st}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+
+    <!--Footer and navbar-->
+    </body>
 
     <footer class="navbar navbar-expand-md navbar-dark fixed-bottom bg-dark">
         <div class="container">
@@ -73,6 +80,11 @@
           <a class="btn btn-sm btn-outline-light" type="button" href="{% url 'djangoapp:contact' %}">Contact Us</a>
         </div>
       </footer>
-    
 
+<script>
+  $(function() {
+    $('#table').bootstrapTable()
+  })
+  
+</script>
 </html>

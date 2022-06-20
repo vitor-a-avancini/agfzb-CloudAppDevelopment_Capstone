@@ -2,11 +2,9 @@ from django.db import models
 from django.utils.timezone import now
 
 
-# Create your models here.
-
 class CarMake(models.Model):
-    name = models.CharField(null= False, max_length=30, default='Audi')
-    description = models.CharField(null= False, max_length=300, default='Audi cars are aight')
+    name = models.CharField(null= False, max_length=30, default='BMW')
+    description = models.CharField(null= False, max_length=300, default='BMW cars are noice')
 
     def __str__(self):
         return 'Name:' + self.name + ',' + \
@@ -27,7 +25,6 @@ class CarModel(models.Model):
 
     def __str__(self):
         return 'Name ' + self.name
-# <HINT> Create a plain Python class `CarDealer` to hold dealer data
 
 class CarDealer:
 
@@ -56,7 +53,6 @@ class CarDealer:
         return "Dealer name: " + self.full_name
 
 
-# <HINT> Create a plain Python class `DealerReview` to hold review data
 class DealerReview:
     def __init__(self, name, dealership, review, purchase, purchase_date, car_make, car_model, car_year, sentiment):
         self.name = name
