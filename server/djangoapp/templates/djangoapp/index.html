@@ -24,11 +24,11 @@
             </div> 
             {% else %}
             <form action="{% url 'djangoapp:login' %}"  method="post" class="ml-auto">
-                {% csrf_token %}<!--Important do not touch-->
+                {% csrf_token %}
                 <input class="" type="text" id="username" name="username" placeholder="UserName:">
                 <input type="password" id="pword" name="pword" placeholder="Password:">
-                <input class="btn btn-outline-success btn-sm" type="submit" value="Login">
-                <a class="btn btn-outline-primary btn-sm" type="submit" href="{% url 'djangoapp:registration' %}">Sign Up</a>
+                <button class="btn btn-outline-success btn-sm" type="submit">Login</button>
+                <button class="btn btn-outline-primary btn-sm" type="submit" href="{% url 'djangoapp:registration' %}">Sign Up</button>
             </form>
             {% endif %}
 
@@ -39,14 +39,33 @@
 </header>
 
 
-    <body>
-    <!-- Remove this line the first time you edit this file -->
-     This is the index page of your Django app!
-    <!--Add a nav bar here -->
-
-    <!--Add a dealer table here -->
-
-</body>
+<main role="main" class="container pt-3">
+    <table class="table" id="table" data-filter-control="true">
+        <thead>
+            <tr>
+                <th data-field="id">ID</th>
+                <th data-field="full_name">Dealership Name</th>
+                <th data-field="city">City</th>
+                <th data-field="address">Address</th>
+                <th data-field="zip">ZIP Code</th>
+                <th data-field="state" data-filter-control="select">State</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for dealer in dealership_list %}
+                <tr>
+                    <td>{{dealer.id}}</td>
+                    <td><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}}</a></td>
+                    <td>{{dealer.city}}</td>
+                    <td>{{dealer.address}}</td>
+                    <td>{{dealer.zip}}</td>
+                    <td>{{dealer.st}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
 
     <footer class="navbar navbar-expand-md navbar-dark fixed-bottom bg-dark">
         <div class="container">
